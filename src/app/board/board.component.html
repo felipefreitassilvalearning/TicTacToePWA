@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <div class="header">
+    <h1>
+      Current Player: <span>{{ player }}</span>
+    </h1>
+
+    <button (click)="newGame()" mat-stroked-button color="warn">
+      Start new Game
+    </button>
+
+    <h2 *ngIf="winner">Player {{ winner }} won the game!</h2>
+  </div>
+
+  <main>
+    <app-square
+      *ngFor="let square of squares; let i = index"
+      [value]="square"
+      (click)="makeMove(i)"
+    >
+    </app-square>
+  </main>
+</div>
