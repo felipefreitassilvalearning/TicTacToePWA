@@ -30,6 +30,27 @@
   }
 
   .output {
+    .outputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 1rem;
+      margin-top: 1rem;
+
+      > h4 > span.accuracy {
+        &[data-accuracy='good'] {
+          color: green;
+        }
+
+        &[data-accuracy='average'] {
+          color: orange;
+        }
+
+        &[data-accuracy='bad'] {
+          color: red;
+        }
+      }
+    }
+
     .apiError {
       color: red;
     }

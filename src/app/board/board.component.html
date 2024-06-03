@@ -27,9 +27,19 @@
 
   <div class="output">
     <h2>Game Output</h2>
-    <h3>kNN Output: {{ knnOutput }}</h3>
-    <h3>MLP Output: {{ mlpOutput }}</h3>
-    <h3>Decision Tree Output: {{ decisionTreeOutput }}</h3>
+    <div class="outputs" *ngIf="totalPredictions > 0">
+      <h3>Correct Output: <span>{{ correctOutput }}</span></h3>
+      <h4>Average Accuracy: <span class="accuracy" [attr.data-accuracy]="correctHitsPercentage > 70 ? 'good' : correctHitsPercentage < 40 ? 'bad' : 'average'">{{ correctHitsPercentage }}%</span></h4>
+
+      <h3>kNN Output: <span>{{ knnOutput }}</span></h3>
+      <h4>Accuracy: <span class="accuracy" [attr.data-accuracy]="knnHitsPercentage > 70 ? 'good' : knnHitsPercentage < 40 ? 'bad' : 'average'">{{ knnHitsPercentage }}%</span></h4>
+
+      <h3>MLP Output: <span>{{ mlpOutput }}</span></h3>
+      <h4>Accuracy: <span class="accuracy" [attr.data-accuracy]="mlpHitsPercentage > 70 ? 'good' : mlpHitsPercentage < 40 ? 'bad' : 'average'">{{ mlpHitsPercentage }}%</span></h4>
+
+      <h3>Decision Tree Output: <span>{{ decisionTreeOutput }}</span></h3>
+      <h4>Accuracy: <span class="accuracy" [attr.data-accuracy]="decisionTreeHitsPercentage > 70 ? 'good' : decisionTreeHitsPercentage < 40 ? 'bad' : 'average'">{{ decisionTreeHitsPercentage }}%</span></h4>
+    </div>
     <p *ngIf="apiError" class="apiError">Unexpected Error: {{ apiError }}</p>
   </div>
 </div>

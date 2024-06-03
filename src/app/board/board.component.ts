@@ -9,11 +9,26 @@ export class BoardComponent implements OnInit {
   squares: any[];
   started: boolean;
   playerCount: number;
-  xIsNext: boolean;
   winner: string | null;
+  xIsNext: boolean;
+  totalPredictions: number;
+
+  correctOutput: string | null;
+  correctHitsOverall: number;
+  correctHitsPercentage: number;
+
   knnOutput: string | null;
+  knnHits: number;
+  knnHitsPercentage: number;
+
   mlpOutput: string | null;
+  mlpHits: number;
+  mlpHitsPercentage: number;
+
   decisionTreeOutput: string | null;
+  decisionTreeHits: number;
+  decisionTreeHitsPercentage: number;
+
   apiError: string | null;
 
   constructor() {
@@ -22,9 +37,24 @@ export class BoardComponent implements OnInit {
     this.playerCount = 1;
     this.winner = null;
     this.xIsNext = true;
+    this.totalPredictions = 0;
+
+    this.correctOutput = null;
+    this.correctHitsOverall = 0;
+    this.correctHitsPercentage = 0;
+
     this.knnOutput = null;
+    this.knnHits = 0;
+    this.knnHitsPercentage = 0;
+
     this.mlpOutput = null;
+    this.mlpHits = 0;
+    this.mlpHitsPercentage = 0;
+
     this.decisionTreeOutput = null;
+    this.decisionTreeHits = 0;
+    this.decisionTreeHitsPercentage = 0;
+
     this.apiError = null;
   }
 
@@ -37,9 +67,24 @@ export class BoardComponent implements OnInit {
     this.started = false;
     this.winner = null;
     this.xIsNext = true;
+    this.totalPredictions = 0;
+
+    this.correctOutput = null;
+    this.correctHitsOverall = 0;
+    this.correctHitsPercentage = 0;
+
     this.knnOutput = null;
+    this.knnHits = 0;
+    this.knnHitsPercentage = 0;
+
     this.mlpOutput = null;
+    this.mlpHits = 0;
+    this.mlpHitsPercentage = 0;
+
     this.decisionTreeOutput = null;
+    this.decisionTreeHits = 0;
+    this.decisionTreeHitsPercentage = 0;
+
     this.apiError = null;
   }
 
@@ -72,8 +117,8 @@ export class BoardComponent implements OnInit {
       const randomIdx = Math.floor(Math.random() * emptySquares.length);
       this.squares.splice(emptySquares[randomIdx], 1, this.player);
       this.xIsNext = !this.xIsNext;
+      this.winner = this.calculateWinner();
     }
-    this.winner = this.calculateWinner();
     this.aiPredict();
   }
 
@@ -107,10 +152,31 @@ export class BoardComponent implements OnInit {
     fetch(`http://localhost:8080/${board}`)
       .then((response) => response.json())
       .then((data) => {
-        const { kNN,  MLP, DTree } = data;
+        const { correctOutput, kNN, MLP, DTree } = data;
+        this.correctOutput = correctOutput;
         this.knnOutput = kNN;
         this.mlpOutput = MLP;
         this.decisionTreeOutput = DTree;
+        const roundToTwo = (num: number) => Math.round(num * 100) / 100;
+        const getPercentage = (num: number) => roundToTwo(num / this.totalPredictions * 100);
+        this.totalPredictions = this.totalPredictions + 1;
+        if (kNN === correctOutput) {
+          this.knnHits = this.knnHits + 1;
+          this.correctHitsOverall = this.correctHitsOverall + 1;
+        }
+        if (MLP === correctOutput) {
+          this.mlpHits = this.mlpHits + 1;
+          this.correctHitsOverall = this.correctHitsOverall + 1;
+        }
+        if (DTree === correctOutput) {
+          this.decisionTreeHits = this.decisionTreeHits + 1;
+          this.correctHitsOverall = this.correctHitsOverall + 1;
+        }
+        this.correctHitsOverall = this.correctHitsOverall;
+        this.knnHitsPercentage = getPercentage(this.knnHits);
+        this.mlpHitsPercentage = getPercentage(this.mlpHits);
+        this.decisionTreeHitsPercentage = getPercentage(this.decisionTreeHits);
+        this.correctHitsPercentage = getPercentage(this.correctHitsOverall / 3);
       })
       .catch((error) => {
         if (error instanceof Error) {
