@@ -26,6 +26,12 @@
     display: grid;
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(3, 200px);
-    grid-gap: 0;
+    grid-gap: 10px;
+  }
+
+  .output {
+    .apiError {
+      color: red;
+    }
   }
 }
