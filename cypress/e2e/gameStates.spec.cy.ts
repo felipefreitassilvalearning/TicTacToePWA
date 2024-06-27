@@ -1,5 +1,5 @@
 describe('TicTacToe', () => {
-  describe('Winning', () => {
+  describe('Winners', () => {
     beforeEach(() => {
       cy.visit('http://localhost:4200');
       cy.viewport(1920, 1080);
