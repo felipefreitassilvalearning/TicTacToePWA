@@ -7,7 +7,7 @@ describe('TicTacToe', () => {
       cy.get('[data-cy="versus-button"]').click();
     });
 
-    it('X wins', () => {
+    it('should show that X has won', () => {
       cy.get('[data-cy="button-1"]').click();
       cy.get('[data-cy="button-2"]').click();
       cy.get('[data-cy="button-3"]').click();
@@ -18,7 +18,7 @@ describe('TicTacToe', () => {
       cy.get('[data-cy="win-description"]').contains('Player X won the game!');
     });
 
-    it('O wins', () => {
+    it('should show that O has won', () => {
       cy.get('[data-cy="button-1"]').click();
       cy.get('[data-cy="button-2"]').click();
       cy.get('[data-cy="button-3"]').click();
@@ -28,7 +28,7 @@ describe('TicTacToe', () => {
       cy.get('[data-cy="win-description"]').contains('Player O won the game!');
     });
 
-    it('Draw', () => {
+    it('should show no winner (for tie)', () => {
       cy.get('[data-cy="button-4"]').click();
       cy.get('[data-cy="button-5"]').click();
       cy.get('[data-cy="button-2"]').click();

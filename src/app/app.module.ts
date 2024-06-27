@@ -1,13 +1,13 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SquareComponent } from './square/square.component';
 import { BoardComponent } from './board/board.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { SquareComponent } from './square/square.component';
 
 @NgModule({
   declarations: [AppComponent, SquareComponent, BoardComponent],
@@ -25,5 +25,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
