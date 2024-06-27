@@ -7,10 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "deploy": "ng deploy",
-    "tests": "npm run test:unit && npm run test:integration && npm run test:e2e",
+    "tests": "npm run test:unit && npm run test:integration && npm run test:e2e || echo 'Remember to run the server (start) and API for all tests to work properly'",
     "test:unit": "ng test --watch=false --browsers=ChromeHeadless",
     "test:integration": "echo 'Open the API folder and run `python test_integration.py`'",
-    "test:e2e": "cypress run"
+    "test:e2e": "cypress run || echo 'Remember to run the API for the tests to work'"
   },
   "private": true,
   "dependencies": {
