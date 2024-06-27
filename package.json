@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "deploy": "ng deploy",
     "tests": "npm run test:unit && npm run test:integration && npm run test:e2e",
-    "test:unit": "ng test --watch=false",
+    "test:unit": "ng test --watch=false --browsers=ChromeHeadless",
     "test:integration": "echo 'Open the API folder and run `python test_integration.py`'",
     "test:e2e": "cypress run"
   },
